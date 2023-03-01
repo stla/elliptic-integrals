@@ -5,8 +5,8 @@ module Math.EllipticIntegrals.Carlson
   carlsonRC, carlsonRC',
   carlsonRG, carlsonRG')
   where
-import           Data.Complex
-import           Math.EllipticIntegrals.Internal
+import Data.Complex                    ( magnitude, Complex )
+import Math.EllipticIntegrals.Internal ( Cplx, toCplx, atanC )
 
 rf_ :: Cplx -> Cplx -> Cplx -> Double -> ((Double,Double,Double), Cplx)
 rf_ x y z err =
@@ -22,10 +22,10 @@ rf_ x y z err =
 -- | Carlson integral RF.
 carlsonRF' :: 
      Double -- ^ bound on the relative error
-  -> Cplx   -- ^ first variable
-  -> Cplx   -- ^ second variable 
-  -> Cplx   -- ^ third variable 
-  -> Cplx
+  -> Complex Double -- ^ first variable
+  -> Complex Double -- ^ second variable 
+  -> Complex Double -- ^ third variable 
+  -> Complex Double
 carlsonRF' err x y z =
   if zeros > 1
     then error "At most one of x, y, z can be 0"
@@ -39,10 +39,10 @@ carlsonRF' err x y z =
 
 -- | Carlson integral RF.
 carlsonRF :: 
-     Cplx   -- ^ first variable
-  -> Cplx   -- ^ second variable 
-  -> Cplx   -- ^ third variable 
-  -> Cplx
+     Complex Double -- ^ first variable
+  -> Complex Double -- ^ second variable 
+  -> Complex Double -- ^ third variable 
+  -> Complex Double
 carlsonRF = carlsonRF' 1e-15
 
 rd_ :: Cplx -> Cplx -> Cplx -> Cplx -> Cplx -> Double ->
@@ -61,10 +61,10 @@ rd_ x y z s fac err =
 -- | Carlson integral RD.
 carlsonRD' ::
      Double -- ^ bound on the relative error
-  -> Cplx   -- ^ first variable
-  -> Cplx   -- ^ second variable 
-  -> Cplx   -- ^ third variable 
-  -> Cplx
+  -> Complex Double -- ^ first variable
+  -> Complex Double -- ^ second variable 
+  -> Complex Double -- ^ third variable 
+  -> Complex Double
 carlsonRD' err x y z =
   if zeros > 1
     then error "At most one of x, y, z can be 0"
@@ -83,10 +83,10 @@ carlsonRD' err x y z =
 
 -- | Carlson integral RD.
 carlsonRD ::
-     Cplx   -- ^ first variable
-  -> Cplx   -- ^ second variable 
-  -> Cplx   -- ^ third variable 
-  -> Cplx
+     Complex Double -- ^ first variable
+  -> Complex Double -- ^ second variable 
+  -> Complex Double -- ^ third variable 
+  -> Complex Double
 carlsonRD = carlsonRD' 1e-15
 
 rj_ :: Cplx -> Cplx -> Cplx -> Cplx -> Cplx -> Double -> Cplx -> Int ->
@@ -111,11 +111,11 @@ rj_ x y z p a maxmagns delta f fac d e err =
 -- | Carlson integral RJ.
 carlsonRJ' ::
      Double -- ^ bound on the relative error
-  -> Cplx   -- ^ first variable
-  -> Cplx   -- ^ second variable 
-  -> Cplx   -- ^ third variable 
-  -> Cplx   -- ^ fourth variable 
-  -> Cplx
+  -> Complex Double -- ^ first variable
+  -> Complex Double -- ^ second variable 
+  -> Complex Double -- ^ third variable 
+  -> Complex Double -- ^ fourth variable 
+  -> Complex Double
 carlsonRJ' err x y z p =
   if zeros > 1
     then error "At most one of x, y, z, p can be 0"
@@ -145,11 +145,11 @@ carlsonRJ' err x y z p =
 
 -- | Carlson integral RJ.
 carlsonRJ ::
-     Cplx   -- ^ first variable
-  -> Cplx   -- ^ second variable 
-  -> Cplx   -- ^ third variable 
-  -> Cplx   -- ^ fourth variable 
-  -> Cplx
+     Complex Double -- ^ first variable
+  -> Complex Double -- ^ second variable 
+  -> Complex Double -- ^ third variable 
+  -> Complex Double -- ^ fourth variable 
+  -> Complex Double
 carlsonRJ = carlsonRJ' 1e-15
 
 
@@ -169,9 +169,9 @@ rc_ x y a magn f err =
 -- | Carlson integral RC.
 carlsonRC' ::
      Double -- ^ bound on the relative error
-  -> Cplx   -- ^ first variable
-  -> Cplx   -- ^ second variable 
-  -> Cplx
+  -> Complex Double -- ^ first variable
+  -> Complex Double -- ^ second variable 
+  -> Complex Double
 carlsonRC' err x y =
   if y == 0
     then error "y cannot be 0"
@@ -188,19 +188,19 @@ carlsonRC' err x y =
 
 -- | Carlson integral RC.
 carlsonRC ::
-     Cplx   -- ^ first variable
-  -> Cplx   -- ^ second variable 
-  -> Cplx
+     Complex Double -- ^ first variable
+  -> Complex Double -- ^ second variable 
+  -> Complex Double
 carlsonRC = carlsonRC' 1e-15
 
 
 -- | Carlson integral RG.
 carlsonRG' ::
      Double -- ^ bound on the relative error passed to `CarlsonRD'`
-  -> Cplx   -- ^ first variable
-  -> Cplx   -- ^ second variable 
-  -> Cplx   -- ^ third variable 
-  -> Cplx
+  -> Complex Double -- ^ first variable
+  -> Complex Double -- ^ second variable 
+  -> Complex Double -- ^ third variable 
+  -> Complex Double
 carlsonRG' err x y z =
   if zeros > 1
     then sqrt(x+y+z) / 2
@@ -216,9 +216,9 @@ carlsonRG' err x y z =
 
 -- | Carlson integral RG.
 carlsonRG ::
-     Cplx   -- ^ first variable
-  -> Cplx   -- ^ second variable 
-  -> Cplx   -- ^ third variable 
-  -> Cplx
+     Complex Double -- ^ first variable
+  -> Complex Double -- ^ second variable 
+  -> Complex Double -- ^ third variable 
+  -> Complex Double
 carlsonRG = carlsonRG' 1e-15
 

@@ -1,15 +1,15 @@
 module Math.EllipticIntegrals.Elliptic
   where
-import Math.EllipticIntegrals.Carlson
-import Data.Complex
-import Math.EllipticIntegrals.Internal
+import Math.EllipticIntegrals.Carlson  ( carlsonRF', carlsonRD', carlsonRJ' )
+import Data.Complex                    ( realPart, Complex )
+import Math.EllipticIntegrals.Internal ( toCplx, getPhiK )
 
 -- | Elliptic integral of the first kind.
 ellipticF' :: 
      Double -- ^ bound on the relative error passed to `carlsonRF'`
-  -> Cplx   -- ^ amplitude
-  -> Cplx   -- ^ parameter
-  -> Cplx
+  -> Complex Double -- ^ amplitude
+  -> Complex Double -- ^ parameter
+  -> Complex Double
 ellipticF' err phi m
   | phi == 0 =
     toCplx 0
@@ -32,17 +32,17 @@ ellipticF' err phi m
 
 -- | Elliptic integral of the first kind.
 ellipticF :: 
-     Cplx -- ^ amplitude
-  -> Cplx -- ^ parameter
-  -> Cplx
+     Complex Double -- ^ amplitude
+  -> Complex Double -- ^ parameter
+  -> Complex Double
 ellipticF = ellipticF' 1e-15
 
 -- | Elliptic integral of the second kind.
 ellipticE' :: 
      Double -- ^ bound on the relative error passed to `carlsonRF'` and `carlsonRD'` 
-  -> Cplx   -- ^ amplitude
-  -> Cplx   -- ^ parameter
-  -> Cplx
+  -> Complex Double -- ^ amplitude
+  -> Complex Double -- ^ parameter
+  -> Complex Double
 ellipticE' err phi m
   | phi == 0 =
     toCplx 0
@@ -62,18 +62,18 @@ ellipticE' err phi m
 
 -- | Elliptic integral of the second kind.
 ellipticE :: 
-     Cplx -- ^ amplitude
-  -> Cplx -- ^ parameter
-  -> Cplx
+     Complex Double -- ^ amplitude
+  -> Complex Double -- ^ parameter
+  -> Complex Double
 ellipticE = ellipticE' 1e-15
 
 -- | Elliptic integral of the third kind.
 ellipticPI' :: 
      Double -- ^ bound on the relative error passed to `carlsonRF'` and `carlsonRJ'` 
-  -> Cplx   -- ^ amplitude
-  -> Cplx   -- ^ characteristic
-  -> Cplx   -- ^ parameter
-  -> Cplx
+  -> Complex Double -- ^ amplitude
+  -> Complex Double -- ^ characteristic
+  -> Complex Double -- ^ parameter
+  -> Complex Double
 ellipticPI' err phi n m
   | phi == 0 =
     toCplx 0
@@ -97,18 +97,18 @@ ellipticPI' err phi n m
 
 -- | Elliptic integral of the third kind.
 ellipticPI ::
-     Cplx -- ^ amplitude
-  -> Cplx -- ^ characteristic
-  -> Cplx -- ^ parameter
-  -> Cplx
+     Complex Double -- ^ amplitude
+  -> Complex Double -- ^ characteristic
+  -> Complex Double -- ^ parameter
+  -> Complex Double
 ellipticPI = ellipticPI' 1e-15
 
 -- | Jacobi zeta function.
 jacobiZeta' ::
      Double -- ^ bound on the relative error passed to `ellipticF'` and `ellipticE'` 
-  -> Cplx   -- ^ amplitude
-  -> Cplx   -- ^ parameter
-  -> Cplx
+  -> Complex Double -- ^ amplitude
+  -> Complex Double -- ^ parameter
+  -> Complex Double
 jacobiZeta' err phi m =
   if m == 1
     then
@@ -122,8 +122,8 @@ jacobiZeta' err phi m =
 
 -- | Jacobi zeta function.
 jacobiZeta ::
-     Cplx -- ^ amplitude
-  -> Cplx -- ^ parameter
-  -> Cplx
+     Complex Double -- ^ amplitude
+  -> Complex Double -- ^ parameter
+  -> Complex Double
 jacobiZeta = jacobiZeta' 1e-15
 

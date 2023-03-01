@@ -1,6 +1,6 @@
 module Math.EllipticIntegrals.Internal
   where
-import Data.Complex
+import Data.Complex ( realPart, Complex(..) )
 
 type Cplx = Complex Double
 

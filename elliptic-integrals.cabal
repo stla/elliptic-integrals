@@ -1,5 +1,5 @@
 name:                elliptic-integrals
-version:             0.1.0.0
+version:             0.1.0.1
 synopsis:            Carlson Elliptic Integrals and Incomplete Elliptic Integrals
 description:         Evaluation of the Carlson elliptic integrals and the incomplete elliptic integrals with complex arguments.
 homepage:            https://github.com/stla/elliptic-integrals#readme
